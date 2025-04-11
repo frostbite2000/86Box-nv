@@ -25,7 +25,7 @@
 #include <86box/rom.h> // DEPENDENT!!!
 #include <86box/video.h>
 #include <86box/nv/vid_nv.h>
-#include <86box/nv/vid_nv3.h>
+#include <86box/nv/vid_nv4.h>
 
 const device_config_t nv4_config[] =
 {

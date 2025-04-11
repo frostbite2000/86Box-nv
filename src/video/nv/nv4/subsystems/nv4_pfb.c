@@ -29,7 +29,7 @@
 #include <86box/nv/vid_nv4.h>
 
 // Functions only used in this translation unit
-uint32_t nv4_pfb_config0_read();
+uint32_t nv4_pfb_config0_read(void);
 void nv4_pfb_config0_write(uint32_t val);
 
 nv_register_t pfb_registers[] = {

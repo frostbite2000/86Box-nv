@@ -56,7 +56,7 @@ typedef enum nv4_pgraph_class_e
     nv4_pgraph_class5f_blit = 0x005f,
     nv4_pgraph_class61_image = 0x0061,
     nv4_pgraph_class54_d3d5tri = 0x0054,
-    nv4_pgraph_class55_d3d6multitri = 0x0055,
+    nv4_pgraph_class55_d3d6tri = 0x0055,
 } nv4_pgraph_class;
 
 /* 
@@ -313,7 +313,7 @@ typedef struct nv4_position_32_s
     0x12 (drivers)
     Beta factor
 */
-typedef struct nv4_object_class_001
+typedef struct nv4_object_class_0012
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;    // Set notifier context for DMA (context switch)
     uint8_t reserved[0x100];        // Required for NV_CLASS Core Functionality
@@ -355,7 +355,7 @@ typedef enum nv4_render_operation_type_e
     Also 0x42 in context IDs
     Render operation used for things like blending. Appears to be 8-bit i.e. a ROP3 with 256 possible operations.
 */
-typedef struct nv4_object_class_002
+typedef struct nv4_object_class_0043
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;    // Set notifier context for DMA (context switch)
     uint8_t reserved[0x100];
@@ -371,7 +371,7 @@ typedef struct nv4_object_class_002
     Also 0x43 in context IDs
     A chroma/color key, like in video editing
 */
-typedef struct nv4_object_class_003
+typedef struct nv4_object_class_0057
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;    // Set notifier context for DMA (context switch)
     uint8_t reserved[0x100];
@@ -382,28 +382,12 @@ typedef struct nv4_object_class_003
 } nv4_chroma_key_t;
 
 /* 
-    Object class 0x04 (real hardware)
-    0x15 (drivers)
-    Also 0x44 in context IDs
-    Plane mask
-*/
-typedef struct nv4_object_class_004
-{
-    nv4_class_ctx_switch_method_t set_notify_ctx_dma;    // Set notifier context for DMA (context switch)
-    uint8_t reserved[0x100];
-    uint32_t set_notify;            // Set notifier
-    uint8_t reserved2[0x1F8];
-    uint8_t color;                  // ROP3 (ID = ????????)
-    uint8_t reserved3[0x1CFB];      // needs to be 0x2000 bytes     
-} nv4_plane_mask_t;
-
-/* 
     Object class 0x05 (real hardware)
     0x19/0x1E/0x47 (drivers)
     Also 0x45 in context IDs
     Clipping rectangle used for various blitting operations
 */
-typedef struct nv4_object_class_005
+typedef struct nv4_object_class_0019
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;    // Set notifier context for DMA (context switch)
     uint8_t reserved[0X100];
@@ -423,7 +407,7 @@ typedef struct nv4_object_class_005
     Also 0x46 in context IDs
     A pattern used for blits. Wahey!
 */
-typedef struct nv4_object_class_006
+typedef struct nv4_object_class_0044
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;    // Set notifier context for DMA (context switch)
     uint8_t reserved[0x100];
@@ -442,7 +426,7 @@ typedef struct nv4_object_class_006
     Also 0x47 in context IDs
     A rectangle. Wahey!
 */
-typedef struct nv4_object_class_007
+typedef struct nv4_object_class_005E
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;       // Set notifier context for DMA (context switch)
     uint8_t reserved[0x100];
@@ -454,33 +438,6 @@ typedef struct nv4_object_class_007
     nv4_size_16_t size[16];
     uint8_t reserved4[0x1B7F];
 } nv4_rectangle_t;
-
-
-/* In case your points weren't colourful enough */
-typedef struct nv4_object_class_008_cpoint_s
-{
-    nv4_color_expanded_t color;                              // argb-format 32-bit color
-    nv4_position_16_t position;                             //
-} nv4_object_class_008_cpoint_t;
-
-/* 
-    Object Class 0x08 (real hardware)
-    0x1A (drivers)
-    Also 0x48 in context IDs
-    A point: the revolutionary 3d graphics technique...
-*/
-typedef struct nv4_object_class_008
-{
-    nv4_class_ctx_switch_method_t set_notify_ctx_dma;                    // Set notifier context for DMA (context switch)
-    uint8_t reserved[0x100];
-    uint32_t set_notify;                            // Set notifier
-    uint8_t reserved2[0x1FC];
-    nv4_color_expanded_t color;                                 // argb?
-    nv4_position_16_t point[16];                    // Boring points 
-    nv4_position_32_t point32[16];                  // Allows you to have points with full 32-bit precision 
-    nv4_object_class_008_cpoint_t cpoint[16];       // Allows you to have c o l o r f u l points! 
-    uint8_t reserved3[0x1A7B];
-} nv4_point_t; 
 
 /* Normal line... */
 typedef struct nv4_object_class_009_line_s
@@ -502,29 +459,6 @@ typedef struct nv4_object_class_009_line32_s
 /* nv4_object_class_009_polyline_t not implemented because it's just a duplicate of nv4_object_class_009_line */
 /* nv4_object_class_009_polyline32_t not implemented because it's just a duplicate of nv4_object_class_009_line32 */
 
-
-/* 
-    Object Class 0x09 (real hardware)
-    0x1B (drivers)
-    Also 0x49 in context IDs
-    It's a line, but also a polygon...
-*/
-typedef struct nv4_object_class_009
-{
-    nv4_class_ctx_switch_method_t set_notify_ctx_dma;                    // Set notifier context for DMA (context switch)
-    uint8_t reserved[0x100];
-    uint32_t set_notify;                            // Set notifier
-    uint8_t reserved2[0x1FC];
-    nv4_color_expanded_t color;                                 // argb?
-    nv4_object_class_009_line_t line[16];           // List of line points (...)
-    nv4_object_class_009_line32_t line32[8];
-    nv4_object_class_009_line_t polyline[32];
-    nv4_object_class_009_line32_t polyline32[16];
-    nv4_color_and_position_16_t cpolyline[16]; // List of line points and colours.
-
-    uint8_t reserved3[0x197b];
-} nv4_line_t;
-
 /* 
     Object Class 0x0A (real hardware)
     0x1c (drivers)
@@ -533,7 +467,7 @@ typedef struct nv4_object_class_009
     This one is where nvidia reinvents the line, but without the starting or ending pixel.
     Seriously.
 */
-typedef struct nv4_object_class_00A
+typedef struct nv4_object_class_005C
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;                    // Set notifier context for DMA (context switch)
     uint8_t reserved[0x100];
@@ -556,7 +490,7 @@ typedef struct nv4_object_class_00A
     
     This is a triangle but seems to be obsolete. It's replaced with UD3D0Z / D3D5 Accelerated Triangle with Zeta Buffer. Does it even exist?
 */
-typedef struct nv4_object_class_00B
+typedef struct nv4_object_class_005D
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;                    // Set notifier context for DMA (context switch)
     uint8_t reserved[0x100];
@@ -583,59 +517,13 @@ typedef struct nv4_object_class_00B
 } nv4_triangle_t;
 
 /* 
-    Object Class 0x0C (real hardware)
-    0x0C (drivers)
-    Also 0x4C in context IDs.
-    
-    GDI text acceleration for Windows 95.
-    How the fuck does this even work?
-*/
-typedef struct nv4_object_class_00C
-{
-    nv4_class_ctx_switch_method_t set_notify_ctx_dma;                    // Set notifier context for DMA (context switch)
-    uint8_t reserved[0x100];
-    uint32_t set_notify;                            // Set notifier
-    uint8_t reserved2[0x2F4];                       
-    uint32_t color_a;                               // Color for Clip A
-    nv4_position_16_t rect_a_position[64];
-    nv4_size_16_t rect_a_size[64];  
-    uint8_t reserved3[0x1F0];   
-    nv4_clip_16_t clip_b;
-    uint32_t color_b;                               // Color for Clip B
-    nv4_clip_16_t clipped_rect[64];
-    uint8_t reserved4[0x1E8];
-    nv4_clip_16_t clip_c;
-    uint32_t color1_c;
-    nv4_size_16_t size_c;
-    nv4_position_16_t point_c;
-    uint32_t bitmap_c[128];
-    uint8_t reserved5[0x368];
-    nv4_clip_16_t clip_d;
-    uint32_t color1_d;
-    nv4_size_16_t size_in_d;
-    nv4_size_16_t size_out_d;
-    nv4_position_16_t point_d;
-    uint32_t bitmap_d[128];
-    uint8_t reserved6[0x364];
-    nv4_clip_16_t clip_e;
-    uint32_t color0_e;
-    uint32_t color1_e;
-    nv4_size_16_t size_in_e;
-    nv4_size_16_t size_out_e;
-    nv4_position_16_t point_e;
-    uint32_t bitmap_e[128];
-    uint8_t reserved7[0xB7F];
-} nv4_win95_text_t;
-
-
-/* 
     Object Class 0x0D (real hardware)
     0x?? (drivers)
     Also 0x4D in context IDs.
     
     Represents reformatting of an image in memory.
 */
-typedef struct nv4_object_class_00D
+typedef struct nv4_object_class_0039
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;                    // Set notifier context for DMA (context switch)
     uint8_t reserved[0x100];
@@ -653,40 +541,6 @@ typedef struct nv4_object_class_00D
     uint8_t reserved4[0x1CD3];  
 } nv4_memory_to_memory_format_t;
 
-/* 
-    Object Class 0x0E (real hardware)
-    0x?? (drivers)
-    Also 0x4E in context IDs.
-    
-    Represents a scaled image coming from memory.
-*/
-typedef struct nv4_object_class_00E
-{
-    nv4_class_ctx_switch_method_t set_notify_ctx_dma;
-    uint8_t reserved[0x100];
-    uint32_t set_notify;
-    uint8_t reserved2[0x200];
-    nv4_position_16_t clip_0;
-    nv4_size_16_t clip_1;
-    nv4_position_16_t rectangle_out_0;
-    nv4_size_16_t rectangle_out_1;
-    // Calculus in a graphics card
-    uint32_t delta_du_dx;
-    uint32_t delta_dv_dy;
-    uint8_t reserved3[0xE0];
-    nv4_size_16_t size; // can be size_y if YUV420
-    uint32_t pitch;
-    uint32_t offset;
-    uint32_t point;
-    // YUV420 stuff
-    uint32_t pitch_yuv420;
-    uint32_t offset_y;
-    uint32_t offset_u;
-    uint32_t offset_v;
-    uint32_t point_yuv420;
-    uint8_t reserved4[0x1BE7];  // pad to 0x2000
-} nv4_scaled_image_from_memory_t;
-
 // (0x0F does not exist)
 
 /* 
@@ -697,7 +551,7 @@ typedef struct nv4_object_class_00E
     Represents a blit.
 */
 
-typedef struct nv4_object_class_010
+typedef struct nv4_object_class_005F
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;
     uint8_t reserved[0x100];
@@ -716,7 +570,7 @@ typedef struct nv4_object_class_010
     
     Represents an image from the cpu (i guess from system memory)
 */
-typedef struct nv4_object_class_011
+typedef struct nv4_object_class_0061
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;
     uint8_t reserved[0x100];
@@ -729,77 +583,6 @@ typedef struct nv4_object_class_011
     nv4_color_expanded_t color[32];                           // The colour to use
     uint8_t reserved4[0x1B7F];
 } nv4_image_t;
-
-/* 
-    Object Class 0x12 (real hardware)
-    0x?? (drivers)
-    Also 0x52 in context IDs.
-    
-    Bitmap from CPU.
-    It seems the difference is that an image is colour but a 
-*/
-typedef struct nv4_object_class_012
-{
-    nv4_class_ctx_switch_method_t set_notify_ctx_dma;
-    uint8_t reserved[0x100];
-    uint32_t set_notify;
-    uint8_t reserved2[0x200];
-    nv4_color_expanded_t color_0;
-    nv4_color_expanded_t color_1;
-    nv4_position_16_t point;                        // Top left(?) of the bitmap
-    nv4_size_16_t size;
-    nv4_size_16_t size_in;
-    uint32_t monochrome_bitmap[32];
-    uint8_t reserved4[0x1B7F];
-} nv4_bitmap_t;
-
-// 0x13 doesn't exist
-
-/* 
-    Object Class 0x14 (real hardware)
-    0x?? (drivers)
-    Also 0x54 in context IDs.
-    
-    Image Transfer to Memory
-    It seems the difference is that an image is colour but a bitmap is b&w
-*/
-typedef struct nv4_object_class_014
-{
-    nv4_class_ctx_switch_method_t set_notify_ctx_dma;
-    uint8_t reserved[0x100];
-    uint32_t set_notify;
-    uint8_t reserved2[0x200];
-    nv4_position_16_t point;
-    nv4_size_16_t size;
-    uint32_t image_pitch;               // bytes per row
-    uint32_t image_start;
-    uint8_t reserved3[0x1C37];
-} nv4_image_to_memory_t;
-
-/* 
-    Object Class 0x15 (real hardware)
-    0x?? (drivers)
-    Also 0x55 in context IDs.
-    
-    Stretched Image from CPU
-    Seems to be, by the very large color array, the main class used in 2d acceleration.
-*/
-typedef struct nv4_object_class_015
-{    
-    nv4_class_ctx_switch_method_t set_notify_ctx_dma;
-    uint8_t reserved[0x100];
-    uint32_t set_notify;
-    uint8_t reserved2[0x1FC];
-    nv4_size_16_t size_in;
-    uint32_t delta_dx_du;
-    uint32_t delta_dy_dv;
-    nv4_position_16_t clip_0;
-    nv4_size_16_t clip_1;
-    uint32_t point12d4; /* todo: fraction struct */
-    uint8_t reserved3[0xE4];
-    uint32_t color[1792];
-    // no reserve needed
-} nv4_stretched_image_from_cpu_t; 
 
 // 0x16 invalid
 
@@ -1173,7 +956,7 @@ typedef struct nv4_d3d5_coordinate_s
     float v;                     // V coordinate within texture for the (top left?) of the triangle where sampling starts.
 } nv4_d3d5_coordinate_t;
 
-typedef struct nv4_object_class_017
+typedef struct nv4_object_class_0054
 {
     nv4_class_ctx_switch_method_t set_notify_ctx_dma;       // Set notifier context for DMA (context switch)
     uint8_t reserved[0x100];
@@ -1191,6 +974,380 @@ typedef struct nv4_object_class_017
     /* No placeholder needed, it really is that long. */
 } nv4_d3d5_accelerated_triangle_with_zeta_buffer_t;
 
+typedef enum nv4_d3d6_texture_pixel_format_e
+{
+    /*
+    16-Bit Pixel Format
+    5 bits red, 5 bits green, 5 bits alpha, "boolean" alpha
+    */
+    nv4_d3d6_pixel_format_le_a1r5g5b5 = 0,
+
+    /*
+    15-Bit Pixel Format (represented as 16)
+    1 bit irrelevant, 5 bits red, 5 bits green, 5 bits alpha
+    */
+    nv4_d3d6_pixel_format_le_x1r5g5b5 = 1,
+
+    /*
+    16-Bit Pixel Format
+    4 bits alpha, 4 bits red, 4 bits green, 4 bits blue
+    */
+    nv4_d3d6_pixel_format_le_a4r4g4b4 = 2,
+
+    /*
+    16-Bit Pixel Format
+    5 bits red, 6 bits green, 5 bits blue 
+    (Required nv4tweak...)
+    */
+    nv4_d3d6_pixel_format_le_r5g6b5 = 3,
+
+} nv4_d3d6_texture_pixel_format;
+
+/* Output format
+
+   The output pixel format...I
+*/
+typedef enum nv4_d3d6_output_pixel_format_e
+{
+    /*
+    32-Bit Pixel Format
+    8 bits irrelevant, 8 bits red, 8 bits green, 8 bits blue
+    */
+    nv4_d3d6_output_pixel_format_le_x8r8g8b8 = 0,
+
+    /*
+    32-Bit Pixel Format
+    8 bits irrelevant, 8 bits red, 8 bits green, 8 bits blue
+    Is this even used?? The riva can't even do 32 bit colour in 3d...
+    */
+    nv4_d3d6_output_pixel_format_le_a8r8g8b8 = 1,
+
+
+} nv4_d3d6_output_pixel_format;
+
+
+/* Texture size 
+
+   NOTE: ONLY 256X256 OR LOWER ARE SUPPORTED! 2048X2048X16 TAKES UP ENTIRE VRAM OF RIVA 128 ZX...
+   I ASSUME THESE ARE INTERNALLY SCALED DOWN
+*/
+typedef enum nv4_d3d6_texture_size_e
+{
+    nv4_d3d6_texture_size_1x1 = 0,
+
+    nv4_d3d6_texture_size_2x2 = 1,
+
+    nv4_d3d6_texture_size_4x4 = 2,
+
+    nv4_d3d6_texture_size_8x8 = 3,
+
+    nv4_d3d6_texture_size_16x16 = 4,
+
+    nv4_d3d6_texture_size_32x32 = 5,
+
+    nv4_d3d6_texture_size_64x64 = 6,
+
+    nv4_d3d6_texture_size_128x128 = 7,
+
+    // Highest size supported natively by hardware?
+    nv4_d3d6_texture_size_256x256 = 8,
+
+    nv4_d3d6_texture_size_512x512 = 9,
+
+    nv4_d3d6_texture_size_1024x1024 = 10,
+
+    nv4_d3d6_texture_size_2048x2048 = 11,
+
+    
+} nv4_d3d6_texture_size;
+
+/* Texture Wrapping Mode for U/V Coordinate Overflow 
+
+*/
+typedef enum nv4_d3d6_texture_wrap_mode_e
+{
+    // Map textures in a cylindrical fashion.
+    nv4_d3d6_texture_wrap_mode_cylindrical = 0,
+
+    // Simply wrap back to the start.
+    nv4_d3d6_texture_wrap_mode_wrap = 1,
+
+    // Mirror the texture.
+    nv4_d3d6_texture_wrap_mode_mirror = 2,
+
+    // Clamp to the last border pixel.
+    nv4_d3d6_texture_wrap_mode_clamp = 3,
+} nv4_d3d6_texture_wrap_mode; 
+
+
+/* This is blending but isn't really considered to be it in the GPU for some reason
+    What do we do with out input texel BEFORE processing it?
+ */
+typedef enum nv4_d3d6_dest_color_interpretation_e
+{
+    // Do nothing
+    nv4_d3d6_source_color_normal = 0,
+
+    // Invert Colour
+    nv4_d3d6_source_color_inverse = 1,
+
+    // Invert Alpha before Processing
+    nv4_d3d6_source_color_alpha_inverse = 2,
+
+    // Take Alpha as 1
+    nv4_d3d6_source_color_alpha_one = 3,
+
+} nv4_d3d6_dest_color_interpretation;
+
+// The full texture format structure
+typedef struct nv4_d3d6_texture_format_s
+{
+    uint16_t color_key_color_mask;
+    bool color_key_enabled : 1;
+    nv4_d3d6_texture_pixel_format color_format : 2;
+    nv4_d3d6_texture_size size_min : 4;
+    nv4_d3d6_texture_size size_max : 4;
+} nv4_d3d6_texture_format_t;
+
+//
+// nv4 d3d6: INTERPOLATION
+//
+
+/* 
+    ??????
+    Interpolating between mip levels? (or for texture blending)
+*/
+typedef enum nv4_d3d6_interpolator_algorithm_e
+{
+    // Zero-order hold interpolation? 
+    nv4_d3d6_interpolator_zoh = 0,
+
+    // Zero-order hold (microsoft variant)?
+    nv4_d3d6_interpolator_zoh_ms = 1,
+
+    // Full-order hold interpolation?   
+    nv4_d3d6_interpolator_foh = 2,
+
+} nv4_d3d6_interpolator_algorithm;
+
+//
+// nv4 d3d6: Z-BUFFER
+//
+
+/* Probably the sorting algorithm */
+typedef enum nv4_d3d6_zbuffer_type_e
+{
+    // Sort based on linear distance
+    nv4_d3d6_zbuffer_linear = 0,
+
+    // Sort based on distance from view frustum
+    nv4_d3d6_zbuffer_screen = 1,
+
+} nv4_d3d6_zbuffer_type;
+
+// nv4 d3d6: WRITE CONTROL (SHARED BETWEEN ZETA BUFFER AND ALPHA)
+typedef enum nv4_d3d6_buffer_write_control_e
+{
+    // Never write.
+    nv4_d3d6_buffer_write_control_never = 0,
+
+    // Only write the alpha.
+    nv4_d3d6_buffer_write_control_alpha = 1,
+
+    // Write both alpha and the zeta-buffer.
+    nv4_d3d6_buffer_write_control_alpha_zeta = 2,
+
+    // Write only the zeta-buffer
+    nv4_d3d6_buffer_write_control_zeta = 3,
+
+    // Write everything (alpha+z+zeta?)
+    nv4_d3d6_buffer_write_control_always = 4,
+
+    
+} nv4_d3d6_buffer_write_control; 
+
+//
+// nv4 d3d6: BUFFER COMPARISON (SHARED BETWEEN ZETA BUFFER AND ALPHA CONTROL)
+//
+
+// Todo: Which direction? (i.e. is less than p1 < p2 or p2 < p1!)
+typedef enum nv4_d3d6_buffer_comparison_type_e
+{
+    // !!!ILLEGAL COMPARISON TYPE!!!!
+    nv4_d3d6_buffer_comparison_illegal = 0,
+
+    // The (depth?) test always fails.
+    nv4_d3d6_buffer_comparison_always_false = 1,
+    
+    // True if less than fail.
+    nv4_d3d6_buffer_comparison_less_than = 2,
+
+    // The test succeeds if equal.
+    nv4_d3d6_buffer_comparison_equal = 3,
+    
+    // The test succeeds if less or equal.
+    nv4_d3d6_buffer_comparison_less_or_equal = 4,
+    
+    // The test succeeds if greater.
+    nv4_d3d6_buffer_comparison_greater = 5,
+    
+    // The test succeeds if the two elements are equal.
+    nv4_d3d6_buffer_comparison_not_equal = 6,
+    
+    // The test succeeds if greater or equal
+    nv4_d3d6_buffer_comparison_greater_or_equal = 7,
+    
+    // The test always succeeds.
+    nv4_d3d6_buffer_comparison_always_true = 8,
+        
+} nv4_d3d6_buffer_comparison_type;
+
+//
+// nv4 d3d6: BLENDING
+//
+
+/* Render Operation for Blending */
+typedef enum nv4_d3d6_blend_render_operation_e
+{
+    nv4_d3d6_blend_render_operation_and = 0,
+
+    nv4_d3d6_blend_add_with_saturation = 1,
+
+} nv4_d3d6_blend_render_operation;
+
+typedef enum nv4_d3d6_blend_beta_factor_e
+{
+    nv4_d3d6_blend_beta_factor_srcalpha = 0,
+
+    nv4_d3d6_blend_beta_factor_zero = 1,
+
+} nv4_d3d6_blend_beta_factor;
+
+typedef enum nv4_d3d6_blend_input0_e
+{
+    nv4_d3d6_blend_input0_srcalpha = 0,
+
+    nv4_d3d6_blend_input0_zero = 1,
+
+} nv4_d3d6_blend_input0;
+
+typedef enum nv4_d3d6_blend_input1_e
+{
+    nv4_d3d6_blend_input1_destalpha = 0,
+
+    nv4_d3d6_blend_input1_zero = 1,
+
+} nv4_d3d6_blend_input1;
+
+//
+// nv4 d3d6: CULLING
+//
+
+typedef enum nv4_d3d6_culling_algorithm_e
+{
+    // Don't cull
+    nv4_d3d6_culling_algorithm_none = 0,
+
+    // Cull Clockwise around view frustum?
+    nv4_d3d6_culling_algorithm_clockwise = 1,
+
+    // Cull counterclockwise around view frustum?
+    nv4_d3d6_culling_algorithm_counterclockwise = 2,
+
+} nv4_d3d6_culling_algorithm;
+
+/* Specular reflection parameters */
+typedef struct nv4_d3d6_specular_s
+{
+    uint8_t i0 : 4;
+    uint8_t i1 : 4;
+    uint8_t i2 : 4;
+    uint8_t i3 : 4;
+    uint8_t i4 : 4;
+    uint8_t i5 : 4;
+    uint8_t fog; //table fog emulation?
+} nv4_d3d6_specular_t;
+
+//
+// nv4 d3d6: MISC
+//
+typedef struct nv4_d3d6_texture_filter_s
+{
+    uint8_t spread_x;
+    uint8_t spread_y;
+    uint8_t mipmap;
+    uint8_t turbo;
+} nv4_d3d6_texture_filter_t;
+
+//
+// nv4 d3d6: OUTPUT CONTROL STRUCTURE
+//
+
+/* Output Control for d3d6 Triangles */
+typedef struct nv4_d3d6_control_out_s
+{
+    nv4_d3d6_interpolator_algorithm ctrl_out_interpolator : 2;
+    uint8_t reserved : 2;
+    nv4_d3d6_texture_wrap_mode wrap_u : 2;                              // Controls wrapping mode of U texture coordinate
+    nv4_d3d6_texture_wrap_mode wrap_v : 2;                              // Controls wrapping move of V texture coordinate
+    nv4_d3d6_output_pixel_format output_pixel_format : 1;
+    bool reserved2 : 1;
+    nv4_d3d6_dest_color_interpretation dest_color_interpretation : 2;
+    nv4_d3d6_culling_algorithm culling_algorithm : 2;
+    bool reserved3 : 1;
+    nv4_d3d6_zbuffer_type zbuffer_type : 1;
+    nv4_d3d6_buffer_comparison_type zeta_buffer_compare : 4;
+    nv4_d3d6_buffer_write_control zeta_write : 3;
+    bool reserved4 : 1;
+    nv4_d3d6_buffer_write_control color_write : 3;
+    bool reserved5 : 1;
+    nv4_d3d6_blend_render_operation blend_rop : 1;
+    nv4_d3d6_blend_input0 blend_input0 : 1;
+    nv4_d3d6_blend_input1 blend_input1 : 1;
+} nv4_d3d6_control_out_t;
+
+typedef struct nv4_d3d6_alpha_control_s
+{
+    uint8_t alpha_key;
+    nv4_d3d6_buffer_comparison_type zeta_buffer_compare : 4;
+    uint32_t reserved : 20;
+} nv4_d3d6_alpha_control_t;
+
+//
+// nv4 d3d6: Triangle Coordinates
+//
+typedef struct nv4_d3d6_coordinate_s
+{
+    nv4_d3d6_specular_t specular_reflection_parameters;     
+    nv4_color_expanded_t color;                              // YOU HAVE TO FLIP THE ENDIANNESS. NVIDIA??? WHAT???
+
+    // Seems more plausible for these specifically to be floats.
+    // Also makes my life easier...
+    float x;                     // X coordinate in 3d space of the triangle
+    float y;                     // Y coordinate in 3d space of the triangle
+    float z;                     // Z coordinate in 3d space of the triangle
+    float m;                     // 1/W for projection
+    float u;                     // U coordinate within texture for the (top left?) of the triangle where sampling starts.
+    float v;                     // V coordinate within texture for the (top left?) of the triangle where sampling starts.
+} nv4_d3d6_coordinate_t;
+
+typedef struct nv4_object_class_0055
+{
+    nv4_class_ctx_switch_method_t set_notify_ctx_dma;       // Set notifier context for DMA (context switch)
+    uint8_t reserved[0x100];
+    uint32_t set_notify;                                    // Set notifier         
+    uint8_t reserved2[0x1FC];
+    uint32_t texture_offset;
+    nv4_d3d6_texture_format_t texture_format;
+    nv4_d3d6_texture_filter_t texture_filter;
+    nv4_color_expanded_t fog_color;                          // Alpha is ignored here!
+    nv4_d3d6_control_out_t control_out;
+    nv4_d3d6_alpha_control_t alpha_control;
+
+    uint8_t reserved3[0xCE4];
+    nv4_d3d6_coordinate_t coordinate_points[128];           // The points we are rendering.
+    /* No placeholder needed, it really is that long. */
+} nv4_d3d6_accelerated_triangle_with_zeta_buffer_t;
 
 // Color and Zeta Buffer algorithm 
 typedef struct nv4_zeta_buffer_s
@@ -1199,54 +1356,7 @@ typedef struct nv4_zeta_buffer_s
     uint32_t zeta;                                            // 16 bits z, 8 bits stenciul
 } nv4_zeta_buffer_t;
 
-typedef struct nv4_object_class_018
-{  
-    nv4_class_ctx_switch_method_t set_notify_ctx_dma;
-    uint8_t reserved[0x100];
-    uint32_t set_notify;
-    uint8_t reserved2[0x1FC];
-    nv4_d3d5_control_out_t control_out; 
-    nv4_d3d5_alpha_control_t alpha_control;
-    uint8_t reserved3[0x4F0];
-    nv4_position_16_t point;
-    nv4_zeta_buffer_t zeta[8];
-} nv4_point_with_zeta_buffer_t;
-
 /* 0x19, 0x1A, 0x1B don't exist */
-
-/* WHY IS THE FORMAT DIFFERENT TO THE REST OF THE GPU? 
-   They are making it look like a bitfield but it's hex?
-
-   THEY ARE ALL LITTLE ENDIAN
-*/
-typedef enum nv4_object_class_01C_pixel_format_e
-{
-    // Y8P4
-    // 12-bits (Y8 - Planar YUV 8 bits (Y value only), 4 bits of indexed colour too?
-    nv4_image_in_memory_pixel_format_le_y8_p4 = 0x1010000,
-
-    // Y16P2
-    // 16-bits (Y16) - Planar YUV 16 bits (Y value only), 2 bits of indexed colour too?
-    nv4_image_in_memory_pixel_format_le_y16_p2 = 0x1010101,
-
-    /* 1 unused bit, 555 15-bit format, p2(?) */
-    nv4_image_in_memory_pixel_format_x1r5g5b5_p2 = 0x1000000,
-
-    // X8G8B8R8, 24-bit colour (or 24-bit colour with alpha)
-    nv4_image_in_memory_pixel_format_x8g8b8r8 = 0x1,
-} nv4_object_class_01C_pixel_format; 
-
-typedef struct nv4_object_class_01C
-{
-    nv4_class_ctx_switch_method_t set_notify_ctx_dma;   // Set notifier context for DMA (context switch)
-    uint8_t reserved[0x100];
-    uint32_t set_notify;                                // Set notifier
-    uint8_t reserved2[0x1F8];
-    nv4_object_class_01C_pixel_format format;           // Completely different from everything else
-    uint32_t pitch;                                     // 16-bit
-    uint32_t linear_address;                            // 22-bit: Linear address in vram.
-    uint8_t reserved3[0x1C3F];
-} nv4_image_in_memory_t;
 
 // See envytools. This is where we finally end up after this mess, it allows parameters to be passed to the methods.
 typedef struct nv4_grobj_s

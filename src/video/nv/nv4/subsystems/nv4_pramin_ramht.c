@@ -35,7 +35,7 @@ It is used to get the offset within RAMHT of a graphics object.
 uint32_t nv4_ramht_hash(uint32_t name, uint32_t channel)
 {
     // the official nvidia hash algorithm, tweaked for readability
-    uint32_t hash = ((name ^ (name >> 8) ^ (name >> 16) ^ (name >> 24)) & 0xFF) ^ (channel & nv4_DMA_CHANNELS_TOTAL); 
+    uint32_t hash = ((name ^ (name >> 8) ^ (name >> 16) ^ (name >> 24)) & 0xFF) ^ (channel & NV4_DMA_CHANNELS_TOTAL); 
 
 
     // is this the right endianness?

@@ -1557,28 +1557,19 @@ void        nv4_pgraph_submit(uint32_t param, uint16_t method, uint8_t channel, 
 // PGRAPH class methods
 // this should be in "vid_nv4_classes.h", but before that can happen, some things need to be rejigged
 void        nv4_generic_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_001_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_002_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_003_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_004_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_005_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_006_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_007_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_008_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_009_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_00a_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_00b_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_00c_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_00d_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_00e_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_010_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_011_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_012_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_014_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_015_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_017_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_018_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
-void        nv4_class_01c_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_0012_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_0043_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_0057_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_0019_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_0044_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_005e_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_005c_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_005d_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_0039_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_005f_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_0061_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_0054_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
+void        nv4_class_0055_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj);
 
 // Notification Engine
 void        nv4_notify_if_needed(uint32_t name, uint32_t method_id, nv4_ramin_context_t context,nv4_grobj_t grobj);

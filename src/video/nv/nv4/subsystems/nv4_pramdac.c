@@ -191,7 +191,7 @@ void nv4_pramdac_set_pixel_clock(void)
     // Create and start if it it's not running.
     if (!nv4->nvbase.pixel_clock_timer)
     {
-        nv4->nvbase.pixel_clock_timer = rivatimer_create(time, NV4_pramdac_pixel_clock_poll);
+        nv4->nvbase.pixel_clock_timer = rivatimer_create(time, nv4_pramdac_pixel_clock_poll);
         rivatimer_start(nv4->nvbase.pixel_clock_timer);
     }
 

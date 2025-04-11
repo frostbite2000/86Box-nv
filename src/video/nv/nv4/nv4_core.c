@@ -1204,7 +1204,7 @@ int32_t nv4_available(void)
 // 8MB or 16MB VRAM
 const device_t nv4_device_pci = 
 {
-    .name = "NVidia RIVA TNT (NV4)",
+    .name = "NVidia RIVA TNT (NV4) PCI",
     .internal_name = "nv4",
     .flags = DEVICE_PCI,
     .local = 0,
@@ -1221,7 +1221,7 @@ const device_t nv4_device_pci =
 // 8MB or 16MB VRAM
 const device_t nv4_device_agp = 
 {
-    .name = "NVidia RIVA TNT (NV4)",
+    .name = "NVidia RIVA TNT (NV4) AGP",
     .internal_name = "nv4_agp",
     .flags = DEVICE_AGP,
     .local = 0,
