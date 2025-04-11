@@ -544,7 +544,7 @@ void nv4_pgraph_arbitrate_method(uint32_t param, uint16_t method, uint8_t channe
                 nv4_class_0012_method(param, method, context, grobj);
                 break; 
             case nv4_pgraph_class43_rop:
-                nv3_class_0043_method(param, method, context, grobj);
+                nv4_class_0043_method(param, method, context, grobj);
                 break;
             case nv4_pgraph_class57_chroma_key:
                 nv4_class_0057_method(param, method, context, grobj);
