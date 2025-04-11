@@ -164,7 +164,7 @@ void nv4_pfb_write(uint32_t address, uint32_t value)
     }
 }
 
-uint32_t nv4_pfb_config0_read()
+uint32_t nv4_pfb_config0_read(void)
 {
     return nv4->pfb.config_0;
 }
