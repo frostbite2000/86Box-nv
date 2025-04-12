@@ -1004,12 +1004,7 @@ void nv4_update_mappings(void)
 
     if (nv4->nvbase.bar1_lfb_base)
     {
-        if (nv4->nvbase.vram_amount == NV4_VRAM_SIZE_8MB)
-        {
-            mem_mapping_set_addr(&nv4->nvbase.framebuffer_mapping, nv4->nvbase.bar1_lfb_base, NV4_VRAM_SIZE_8MB);
-            mem_mapping_set_addr(&nv4->nvbase.framebuffer_mapping_mirror, nv4->nvbase.bar1_lfb_base + NV4_LFB_MIRROR_START, NV4_VRAM_SIZE_8MB);
-        }
-        else if (nv4->nvbase.vram_amount == NV4_VRAM_SIZE_16MB)
+        if (nv4->nvbase.vram_amount == NV4_VRAM_SIZE_16MB)
         {    
             mem_mapping_set_addr(&nv4->nvbase.framebuffer_mapping, nv4->nvbase.bar1_lfb_base, NV4_VRAM_SIZE_16MB);
             mem_mapping_set_addr(&nv4->nvbase.framebuffer_mapping_mirror, nv4->nvbase.bar1_lfb_base + NV4_LFB_MIRROR_START, NV4_VRAM_SIZE_16MB);
