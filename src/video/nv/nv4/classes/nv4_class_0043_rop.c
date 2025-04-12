@@ -28,7 +28,7 @@
 #include <86box/nv/vid_nv.h>
 #include <86box/nv/vid_nv4.h>
 
-void nv3_class_0043_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj)
+void nv4_class_0043_method(uint32_t param, uint32_t method_id, nv4_ramin_context_t context, nv4_grobj_t grobj)
 {
     switch (method_id)
     {
