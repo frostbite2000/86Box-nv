@@ -44,7 +44,7 @@ nv4_color_expanded_t nv4_render_expand_color(uint32_t color, nv4_grobj_t grobj)
     // grobj0 = seems to share the format of PGRAPH_CONTEXT_SWITCH register.
 
     uint8_t format = (grobj.grobj_0 & 0x07);
-    bool alpha_enabled = (grobj.grobj_0 >> nv4_PGRAPH_CONTEXT_SWITCH_ALPHA) & 0x01;
+    bool alpha_enabled = (grobj.grobj_0 >> NV4_PGRAPH_CONTEXT_SWITCH_ALPHA) & 0x01;
 
     nv4_color_expanded_t color_final; 
     // set the pixel format
