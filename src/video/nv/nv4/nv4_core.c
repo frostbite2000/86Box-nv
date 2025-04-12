@@ -934,16 +934,6 @@ void nv4_init_mappings_svga(void)
         nv4_dfb_write32,
         nv4->nvbase.svga.vram, 0, &nv4->nvbase.svga);
 
-    // the SVGA/LFB mapping is also mirrored
-    mem_mapping_add(&nv4->nvbase.framebuffer_mapping_mirror, 0, 0, 
-        nv4_dfb_read8,
-        nv4_dfb_read16,
-        nv4_dfb_read32,
-        nv4_dfb_write8,
-        nv4_dfb_write16,
-        nv4_dfb_write32,
-        nv4->nvbase.svga.vram, 0, &nv4->nvbase.svga);
-
     io_sethandler(0x03c0, 0x0020, 
     nv4_svga_in, NULL, NULL, 
     nv4_svga_out, NULL, NULL, 
@@ -989,7 +979,6 @@ void nv4_update_mappings(void)
     // turn off bar0 and bar1 by defualt
     mem_mapping_disable(&nv4->nvbase.mmio_mapping);
     mem_mapping_disable(&nv4->nvbase.framebuffer_mapping);
-    mem_mapping_disable(&nv4->nvbase.framebuffer_mapping_mirror);
 
     // Setup BAR0 (MMIO)
 
@@ -999,21 +988,8 @@ void nv4_update_mappings(void)
     if (nv4->nvbase.bar0_mmio_base)
         mem_mapping_set_addr(&nv4->nvbase.mmio_mapping, nv4->nvbase.bar0_mmio_base, NV4_MMIO_SIZE);
 
-    // if this breaks anything, remove it
-    nv_log("BAR1 (Linear Framebuffer / NV_USER Base & RAMIN) = 0x%08x\n", nv4->nvbase.bar1_lfb_base);
-
     if (nv4->nvbase.bar1_lfb_base)
-    {
-        if (nv4->nvbase.vram_amount == NV4_VRAM_SIZE_16MB)
-        {    
-            mem_mapping_set_addr(&nv4->nvbase.framebuffer_mapping, nv4->nvbase.bar1_lfb_base, NV4_VRAM_SIZE_16MB);
-            mem_mapping_set_addr(&nv4->nvbase.framebuffer_mapping_mirror, nv4->nvbase.bar1_lfb_base + NV4_LFB_MIRROR_START, NV4_VRAM_SIZE_16MB);
-        }
-        else
-        {
-            fatal("NV4 4MB not implemented yet"); 
-        }
-    }
+        mem_mapping_set_addr(&nv4->nvbase.framebuffer_mapping, nv4->nvbase.bar1_lfb_base, NV4_VRAM_SIZE_16MB);
 
     // Did we change the banked SVGA mode?
     switch (nv4->nvbase.svga.gdcreg[0x06] & 0x0c)
