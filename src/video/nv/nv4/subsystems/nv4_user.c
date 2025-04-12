@@ -37,8 +37,8 @@ uint32_t nv4_user_read(uint32_t address)
     //todo: print out the subchannel 
     uint8_t method_offset = (address & 0x1FFC);
 
-    uint8_t channel = (address - nv4_USER_START) / 0x10000;
-    uint8_t subchannel = ((address - nv4_USER_START)) / 0x2000 % nv4_DMA_SUBCHANNELS_PER_CHANNEL;
+    uint8_t channel = (address - NV4_USER_START) / 0x10000;
+    uint8_t subchannel = ((address - NV4_USER_START)) / 0x2000 % NV4_DMA_SUBCHANNELS_PER_CHANNEL;
 
     nv_log_verbose_only("User Submission Area PIO Channel %d.%d method_offset=0x%04x\n", channel, subchannel, method_offset);
 
