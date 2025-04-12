@@ -37,7 +37,7 @@ void nv3_class_0043_method(uint32_t param, uint32_t method_id, nv4_ramin_context
             nv_log("Method Execution: ROP = %02x\n", nv4->pgraph.rop);
             break;  
         default:
-            warning("%s: Invalid or unimplemented method 0x%04x\n", nv3_class_names[context.class_id], method_id);
+            warning("%s: Invalid or unimplemented method 0x%04x\n", nv4_class_names[context.class_id], method_id);
             nv4_pgraph_interrupt_invalid(NV4_PGRAPH_INTR_1_SOFTWARE_METHOD_PENDING);
             break;
     }
