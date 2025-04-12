@@ -119,6 +119,7 @@ add_library(vid OBJECT
     nv/nv4/classes/nv4_class_0055_d3d6_tri.c
 
     nv/nv4/render/nv4_render_core.c
+    nv/nv4/render/nv4_render_primitives.c
     nv/nv4/render/nv4_render_blit.c    
  
 )
